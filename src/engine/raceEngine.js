@@ -33,26 +33,42 @@ export async function playRaceEngine (character1, character2) {
 
       console.log(`${character1.name} confrontou com ${character2.name}! 🥊\n`);
 
-      await logRollResult(character1.name, "poder", rollDicePlayer1, character1.attributeLabels.power);
-      await logRollResult(character2.name, "poder", rollDicePlayer2, character2.attributeLabels.power);
+      logRollResult(character1.name, "poder", rollDicePlayer1, character1.attributeLabels.power);
+      logRollResult(character2.name, "poder", rollDicePlayer2, character2.attributeLabels.power);
 
       if (powerPlayer1 > powerPlayer2) {
           character1.points++;
           if (confrontType === CONFRONT_TYPES.CASCO) {
-              if (character2.points > 0) character2.points--;
-              await logConfrontTypesCasco(character1.name, character2.name);
+              if (character2.points > 0) {
+                character2.points--;
+                logConfrontTypesCasco(character1.name, character2.name);
+              } else {
+                console.log(`${character1.name} venceu o confronto e ganhou 1 ponto! ${character2.name} está em 0 pontos e foi protegido! 🛡️`);
+              }
           } else {
               character2.points = Math.max(0, character2.points - 2);
-              await logConfrontTypesBomba(character1.name, character2.name);
+              if (character2.points === 0) {
+                console.log(`${character1.name} venceu o confronto e ganhou 1 ponto! ${character2.name} foi atingido por uma bomba mas estava protegido! 🛡️`);
+              } else {
+                logConfrontTypesBomba(character1.name, character2.name);
+              }
           }
       } else if (powerPlayer2 > powerPlayer1) {
           character2.points++;
           if (confrontType === CONFRONT_TYPES.CASCO) {
-              if (character1.points > 0) character1.points--;
-              await logConfrontTypesCasco(character2.name, character1.name);
+              if (character1.points > 0) {
+                character1.points--;
+                logConfrontTypesCasco(character2.name, character1.name);
+              } else {
+                console.log(`${character2.name} venceu o confronto e ganhou 1 ponto! ${character1.name} está em 0 pontos e foi protegido! 🛡️`);
+              }
           } else {
               character1.points = Math.max(0, character1.points - 2);
-              await logConfrontTypesBomba(character2.name, character1.name);
+              if (character1.points === 0) {
+                console.log(`${character2.name} venceu o confronto e ganhou 1 ponto! ${character1.name} foi atingido por uma bomba mas estava protegido! 🛡️`);
+              } else {
+                logConfrontTypesBomba(character2.name, character1.name);
+              }
           }
       } else {
           console.log(`O confronto terminou empatado! 🤝`);
