@@ -37,3 +37,15 @@ export function sortConfrontType() {
 
   return result;
 }
+
+// Função para sortear aleatoriamente 2 players
+export function getRandomPlayers(players) {
+	const index1 = Math.floor(Math.random() * players.length);
+	let index2;
+
+	do {
+		index2 = Math.floor(Math.random() * players.length);
+	} while (index1 === index2);
+
+	return [players[index1], players[index2]];
+}
