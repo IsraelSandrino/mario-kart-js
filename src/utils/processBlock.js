@@ -7,8 +7,8 @@ export async function processBlock(character1, character2, roll1, roll2, attribu
     const total1 = roll1 + attr1;
     const total2 = roll2 + attr2;
     
-    await logRollResult(character1.name, attributeName, roll1, attr1);
-    await logRollResult(character2.name, attributeName, roll2, attr2);
+    logRollResult(character1.name, attributeName, roll1, attr1);
+    logRollResult(character2.name, attributeName, roll2, attr2);
     
     if (total1 > total2) {
         console.log(`\n${character1.name} venceu ${blockName}! 🏆`);
