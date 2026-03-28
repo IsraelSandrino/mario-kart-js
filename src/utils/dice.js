@@ -2,7 +2,7 @@ import { BLOCKS, CONFRONT_TYPES, RACE_CONFIG } from "../constants.js";
 
 // Função para simular o lançamento de um dado de 6 faces
 export function rollDice() {
-  return Math.floor(Math.random() * RACE_CONFIG.TOTAL_LAPS) + 1;
+  return Math.floor(Math.random() * RACE_CONFIG.DICE_SIDES) + 1;
 }
 
 // Função para sortear um atributo aleatório (RETA, CURVA ou CONFRONTO)
